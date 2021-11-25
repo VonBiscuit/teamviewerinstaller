@@ -7,6 +7,7 @@ import subprocess
 
 teamviewer_link_32 = "https://download.teamviewer.com/download/TeamViewer_Setup.exe"
 teamviewer_link_64 = "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
+bit_version = 64
 
 
 def determine_if_64_or_32_bit():
@@ -15,7 +16,7 @@ def determine_if_64_or_32_bit():
     return bit_version
 
 
-def download_teamviewer(bit_version):
+def download_teamviewer():
     if bit_version == 64:
         r = requests.get(teamviewer_link_64)
         with open('TeamViewer_Setup_x64.exe', 'wb') as outfile:
@@ -33,17 +34,27 @@ def click_by_button_image_location(image_name):
     pyautogui.click(button_point)
 
 
-def open_team_viewer(filename):
-    subprocess.Popen('TeamViewer_Setup_x64.exe')
+def open_team_viewer():
+    if bit_version == 64:
+        subprocess.Popen('TeamViewer_Setup_x64.exe')
+    if bit_version == 32:
+        subprocess.Popen('TeamViewer_Setup.exe')
     time.sleep(3)
 
 
 def just_run_no_install():
     open_team_viewer()
-    click_by_button_image_location('runOnly.png')
-    click_by_button_image_location('acceptRunButton.png')
+    # click_by_button_image_location('runOnly.png')
+    # click_by_button_image_location('acceptRunButton.png')
+
+
+def default_installation():
+    open_team_viewer()
+    # click_by_button_image_location('defaultInstallation.png')
+    # click_by_button_image_location('acceptNextButton.png')
 
 
 if __name__ == '__main__':
-    download_teamviewer(determine_if_64_or_32_bit())
+    determine_if_64_or_32_bit()
+    # download_teamviewer(determine_if_64_or_32_bit())
     just_run_no_install()
