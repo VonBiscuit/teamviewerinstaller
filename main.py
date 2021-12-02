@@ -50,11 +50,19 @@ def just_run_no_install():
 
 def default_installation():
     open_team_viewer()
-    # click_by_button_image_location('defaultInstallation.png')
-    # click_by_button_image_location('acceptNextButton.png')
+    click_by_button_image_location('defaultInstallation.png')
+    click_by_button_image_location('acceptNextButton.png')
+
+
+def custom_installation():
+    open_team_viewer()
+    click_by_button_image_location('customInstallation.png')
+    click_by_button_image_location('acceptNextButton.png')
 
 
 if __name__ == '__main__':
     determine_if_64_or_32_bit()
-    # download_teamviewer(determine_if_64_or_32_bit())
-    just_run_no_install()
+    download_teamviewer()
+    # just_run_no_install()
+    # default_installation()
+    # custom_installation()
